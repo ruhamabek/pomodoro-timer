@@ -34,6 +34,7 @@ document.querySelector('.js-start-button')
             clearInterval(intervalId);
            
           }
-        }, 1000); 
+        }, 60000); 
+        return minutes;
       }
     }
