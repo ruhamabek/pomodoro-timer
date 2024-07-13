@@ -14,20 +14,35 @@ function renderPomodoro() {
   `;
   return pomodoroHTML;
 }
+
 document.querySelector('.js-container')
     .innerHTML = renderPomodoro();
 
+let isTimerRunning = false;
+let intervalId;
+let intervalId2;
 document.querySelector('.js-start-button')
-    .addEventListener('click',()=>{
-     document.querySelector('.js-minutes').innerHTML = countDownMinutes();
-     document.querySelector('.js-seconds').innerHTML = countDownSeconds();
-    });
+    .addEventListener('click', () => {
+      if (!isTimerRunning) {
+        countDownMinutes();
+        countDownSeconds();
+        isTimerRunning = true;
+  }
+});
+
+document.querySelector('.js-stop-button')
+    .addEventListener('click', () => {
+      if (isTimerRunning) {
+        clearInterval(intervalId);
+        isTimerRunning = false;
+  }
+});
 
     function countDownMinutes() {
       let minutes = parseInt(document.querySelector('.js-minutes').innerHTML, 10); 
     
       if (minutes === 25) {
-        const intervalId = setInterval(() => {
+          intervalId = setInterval(() => {
           minutes--;
           document.querySelector('.js-minutes').textContent = minutes; 
     
@@ -49,7 +64,7 @@ document.querySelector('.js-start-button')
       minutes--;
       countDownMinutes();
       document.querySelector('.js-seconds').textContent = seconds; 
-      const intervalId = setInterval(() => { 
+           intervalId = setInterval(() => { 
            seconds--;
            document.querySelector('.js-seconds').textContent =seconds; 
      
@@ -58,7 +73,7 @@ document.querySelector('.js-start-button')
              seconds = 59;
              document.querySelector('.js-seconds').textContent = seconds;
              if(seconds === 59) {
-        const intervalId2 = setInterval(()=>{
+                  intervalId2 = setInterval(()=>{
                   seconds--;
                   document.querySelector('.js-seconds').textContent = seconds;
           if (seconds === 0) {
@@ -75,5 +90,5 @@ document.querySelector('.js-start-button')
            } 
          } 
 
-
-      
+     
+        
