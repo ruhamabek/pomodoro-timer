@@ -32,13 +32,15 @@ document.querySelector('.js-start-button')
 
 document.querySelector('.js-stop-button')
     .addEventListener('click', () => {
-      if (isTimerRunning) {
-        clearInterval(intervalId);
-        isTimerRunning = false;
+      if (isTimerRunning) { 
+        isTimerRunning = false;     
+        clearInterval(intervalId2);
+        clearInterval(intervalId);   
   }
+  
 });
 
-    function countDownMinutes() {
+      function countDownMinutes() {
       let minutes = parseInt(document.querySelector('.js-minutes').innerHTML, 10); 
     
       if (minutes === 25) {
@@ -50,19 +52,18 @@ document.querySelector('.js-stop-button')
             clearInterval(intervalId);
            
           }
+
         }, 60000); 
         return minutes;
       }
     }
 
     
-     function countDownSeconds() {
+      function countDownSeconds() {
       let minutes = parseInt(document.querySelector('.js-minutes').innerHTML, 10);
       let seconds = parseInt(document.querySelector('.js-seconds').innerHTML, 10);
       while(minutes !== 0) {
       seconds = 59;
-      minutes--;
-      countDownMinutes();
       document.querySelector('.js-seconds').textContent = seconds; 
            intervalId = setInterval(() => { 
            seconds--;
